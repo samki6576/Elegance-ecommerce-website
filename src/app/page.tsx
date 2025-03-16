@@ -1,13 +1,12 @@
 "use client"; // Mark this file as a client component
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Search, ShoppingCart, Heart, User, Menu, ChevronRight, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
-
 
 // Data
 const categoryImages = {
@@ -41,27 +40,33 @@ const products = [
 ];
 
 // Theme Toggle Component
-
 function ThemeToggle() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    // This code will only run on the client side
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    } else {
+      document.documentElement.classList.remove("dark");
+      setDarkMode(false);
+    }
+  }, []);
+
   const toggleTheme = () => {
     const htmlElement = document.documentElement;
     if (htmlElement.classList.contains("dark")) {
       htmlElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
+      setDarkMode(false);
     } else {
       htmlElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
+      setDarkMode(true);
     }
   };
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
 
   return (
     <Button
@@ -69,17 +74,15 @@ function ThemeToggle() {
       size="icon"
       onClick={toggleTheme}
     >
-      {document.documentElement.classList.contains("dark") ? (
-        <Sun className="h-5 w-5" />
-      ) : (
-        <Moon className="h-5 w-5" />
-      )}
+      {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
       <span className="sr-only">Toggle theme</span>
     </Button>
   );
 }
 
 export default function Home() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       {/* Header */}
@@ -90,19 +93,19 @@ export default function Home() {
               <span className="text-xl font-bold">ELEGANCE</span>
             </Link>
             <nav className="hidden md:flex gap-6">
-              <Link href="#" className="text-sm font-medium transition-colors hover:text-primary">
+              <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
                 Home
               </Link>
-              <Link href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+              <Link href="/shop" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
                 Shop
               </Link>
-              <Link href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+              <Link href="/categories" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
                 Categories
               </Link>
-              <Link href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+              <Link href="/about" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
                 About
               </Link>
-              <Link href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+              <Link href="/contact" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
                 Contact
               </Link>
             </nav>
@@ -118,40 +121,43 @@ export default function Home() {
             </div>
             <div className="flex items-center gap-4">
               <ThemeToggle />
-              <Link href="#" aria-label="Account">
+              <Link href="/account" aria-label="Account">
                 <User className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="Wishlist">
+              <Link href="/wishlist" aria-label="Wishlist">
                 <Heart className="h-5 w-5" />
               </Link>
-              <Link href="#" className="relative" aria-label="Cart">
+              <Link href="/cart" className="relative" aria-label="Cart">
                 <ShoppingCart className="h-5 w-5" />
                 <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-medium text-primary-foreground">
                   3
                 </span>
               </Link>
               {/* Mobile Menu Toggle */}
-              <label htmlFor="mobile-menu-toggle" className="md:hidden">
-                <Button variant="ghost" size="icon" asChild>
-                  <div>
-                    <Menu className="h-5 w-5" />
-                    <span className="sr-only">Toggle menu</span>
-                  </div>
-                </Button>
-              </label>
-              <input type="checkbox" id="mobile-menu-toggle" className="hidden" />
-              <div className="mobile-menu hidden md:hidden absolute top-16 left-0 right-0 bg-background border-t">
-                <nav className="flex flex-col p-4 gap-4">
-                  <Link href="#" className="text-sm font-medium hover:text-primary">Home</Link>
-                  <Link href="#" className="text-sm font-medium hover:text-primary">Shop</Link>
-                  <Link href="#" className="text-sm font-medium hover:text-primary">Categories</Link>
-                  <Link href="#" className="text-sm font-medium hover:text-primary">About</Link>
-                  <Link href="" className="text-sm font-medium hover:text-primary">Contact</Link>
-                </nav>
-              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Toggle menu</span>
+              </Button>
             </div>
           </div>
         </div>
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-background border-t">
+            <nav className="flex flex-col p-4 gap-4">
+              <Link href="/" className="text-sm font-medium hover:text-primary">Home</Link>
+              <Link href="/shop" className="text-sm font-medium hover:text-primary">Shop</Link>
+              <Link href="/categories" className="text-sm font-medium hover:text-primary">Categories</Link>
+              <Link href="/about" className="text-sm font-medium hover:text-primary">About</Link>
+              <Link href="/contact" className="text-sm font-medium hover:text-primary">Contact</Link>
+            </nav>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
