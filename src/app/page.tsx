@@ -1,13 +1,13 @@
 "use client"; // Mark this file as a client component
 
-
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Search, ShoppingCart, Heart, User, Menu, ChevronRight, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+
 
 // Data
 const categoryImages = {
@@ -41,6 +41,7 @@ const products = [
 ];
 
 // Theme Toggle Component
+
 function ThemeToggle() {
   const toggleTheme = () => {
     const htmlElement = document.documentElement;
@@ -145,7 +146,7 @@ export default function Home() {
                   <Link href="#" className="text-sm font-medium hover:text-primary">Shop</Link>
                   <Link href="#" className="text-sm font-medium hover:text-primary">Categories</Link>
                   <Link href="#" className="text-sm font-medium hover:text-primary">About</Link>
-                  <Link href="#" className="text-sm font-medium hover:text-primary">Contact</Link>
+                  <Link href="" className="text-sm font-medium hover:text-primary">Contact</Link>
                 </nav>
               </div>
             </div>
