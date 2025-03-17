@@ -1,5 +1,8 @@
 module.exports = {
-  eslint: {
-    ignoreDuringBuilds: true, // Ignore ESLint errors during build
+  // next.config.js
+
+  images: {
+    domains: ["images.unsplash.com"], // Add the domain here
   },
+
 };
