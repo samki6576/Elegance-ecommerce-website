@@ -16,12 +16,12 @@ export const metadata: Metadata = {
   title: "Elegance",
   icons: {
     icon: [
-      { url: "/r.png", sizes: "32x32" },
-      { url: "/r.png", type: "image/png", sizes: "192x192" },
-      { url: "/r.png", type: "image/png", sizes: "512x512" },
+      { url: "/r.jpg", sizes: "32x32" },
+      { url: "/r.jpg", type: "image/jpg", sizes: "192x192" },
+      { url: "/r.jpg", type: "image/jpg", sizes: "512x512" },
     ],
     apple: [
-      { url: "/r.png", type: "image/png", sizes: "180x180" },
+      { url: "/r.jpg", type: "image/jpg", sizes: "180x180" },
     ],
   },
   description: "Ecommerce Website",
