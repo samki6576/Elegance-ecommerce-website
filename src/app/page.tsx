@@ -408,8 +408,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t bg-muted/50">
+           <footer className="border-t bg-muted/50">
         <div className="container px-4 md:px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
@@ -475,13 +474,12 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} ELEGANCE. All rights reserved.</p>
-      
-            
-            </div>
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} ELEGANCE. All rights reserved.
+            </p>
           </div>
-      
+        </div>
       </footer>
-    
+    </div>
   );
-
+}
