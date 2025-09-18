@@ -476,16 +476,8 @@ export default function Home() {
           </div>
           <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-xs text-muted-foreground">© {new Date().getFullYear()} ELEGANCE. All rights reserved.</p>
-            <div className="flex items-center space-x-4 mt-4 md:mt-0">
-              <Image src="/placeholder.svg?height=30&width=50&text=Visa" alt="Visa" width={50} height={30} />
-              <Image
-                src="/placeholder.svg?height=30&width=50&text=Mastercard"
-                alt="Mastercard"
-                width={50}
-                height={30}
-              />
-              <Image src="/placeholder.svg?height=30&width=50&text=PayPal" alt="PayPal" width={50} height={30} />
-              <Image src="/placeholder.svg?height=30&width=50&text=Apple Pay" alt="Apple Pay" width={50} height={30} />
+      
+            
             </div>
           </div>
         </div>
